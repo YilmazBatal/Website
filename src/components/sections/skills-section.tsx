@@ -74,7 +74,7 @@ export function SkillSection() {
     { icon: "/icons/css.png", name: "CSS3", alt: "CSS3" },
     { icon: "/icons/js.png", name: "Javascript", alt: "Javascript" },
     { icon: "/icons/nodejs.png", name: "Node JS", alt: "Node JS" },
-    { icon: "/icons/tw.png", name: "Tailwind", alt: "Tailwind" },
+    { icon: "/icons/TW.png", name: "Tailwind", alt: "Tailwind" },
     { icon: "/icons/nextjs.png", name: "Next JS", alt: "Next.js" },
   ];
 
