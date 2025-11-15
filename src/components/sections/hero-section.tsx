@@ -110,7 +110,7 @@ export function HeroSection() {
           }}
         >
           <Image  
-            src={"/profile-pic.jpg"}
+            src={"/profilepic.jpg"}
             alt={"Profile Picture"}
             width={250}
             height={250}
