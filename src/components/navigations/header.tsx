@@ -15,7 +15,16 @@ export function Header() {
   return (
     <header className="sticky top-0 w-full backdrop-blur-md bg-background/30 z-50">
       <div className="h-16 container mx-auto max-w-7xl flex flex-row items-center justify-between md:px-12 px-4 mx-auto">
-        <div className="font-mono font-bold text-2xl">Yılmaz Batal</div>
+        <div className="font-mono font-bold text-2xl">
+          <Button
+            asChild
+            variant={"link"}
+            className="hover:no-underline hover:scale-[1.15] text-md"
+          >
+            <Link href="https://yilmazbatal.com">Yılmaz Batal </Link>
+          </Button>
+        </div>
+        
 
         {/* --- Desktop Menu --- */}
         <div className="flex flex row justify-between items-center gap-3 md:block hidden ">
