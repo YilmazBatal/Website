@@ -65,17 +65,15 @@ export function ProjectsSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
-  // Animasyon varyantları
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     animate: isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
   };
 
   return (
-    <div id="Projects" className="md:py-32 py-16 px-6 md:px-8 overflow-hidden">
+    <div id="Projects" className="md:py-32 py-16 px-6 md:px-8">
       <div ref={ref} className="max-w-7xl mx-auto flex flex-col items-center">
         
-        {/* Header */}
         <div className="text-center mb-20">
           <motion.h1
             variants={fadeInUp}
@@ -91,13 +89,13 @@ export function ProjectsSection() {
             initial="initial"
             animate="animate"
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="text-gray-400 font-mono text-sm md:text-base max-w-2xl mx-auto leading-relaxed"
+            className=" text-[1.33rem] font-mono mb-2 max-w-2xl"
           >
-            A collection of my technical works, featuring both completed game jam entries and ongoing architectural studies. I focus on building clean, modular systems, whether a project is finished or in active iteration.
+            A collection of my technical works, featuring both completed game jam entries and ongoing architectural studies.
           </motion.p>
         </div>
 
-        {/* Signature Project Card */}
+        {/* Signature Card Kısmı */}
         <motion.div
           variants={fadeInUp}
           initial="initial"
@@ -118,7 +116,6 @@ export function ProjectsSection() {
                   <p className="text-gray-400 font-mono text-lg mb-10 leading-relaxed max-w-xl">
                     {projectsData.signature.desc}
                   </p>
-                  
                   <div className="flex flex-wrap gap-3 mb-10">
                     {projectsData.signature.techs.map((tech, i) => (
                       <span key={i} className="px-3 py-1.5 rounded-lg bg-blue-500/5 border border-blue-500/20 text-xs font-mono text-blue-300/60 uppercase tracking-tight">
@@ -126,22 +123,15 @@ export function ProjectsSection() {
                       </span>
                     ))}
                   </div>
-
                   <div className="inline-flex items-center gap-3 text-white font-bold uppercase tracking-widest text-xs group-hover:text-blue-400 transition-all">
                     Exploration Mode <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform" />
                   </div>
                 </div>
                 
-                {/* Resim Alanı Fix */}
                 <div className="lg:w-2/5 bg-slate-800/30 min-h-[350px] relative border-l border-white/5 flex items-center justify-center p-8">
                    {projectsData.signature.imageUrl ? (
                       <div className="relative w-full h-full">
-                        <Image 
-                          src={projectsData.signature.imageUrl} 
-                          fill 
-                          className="object-contain opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" 
-                          alt="signature" 
-                        />
+                        <Image src={projectsData.signature.imageUrl} fill className="object-contain opacity-60 group-hover:opacity-100 transition-all duration-700 group-hover:scale-105" alt="signature" />
                       </div>
                    ) : (
                       <ImageIcon size={80} className="text-white/[0.03]" />
@@ -152,39 +142,29 @@ export function ProjectsSection() {
           </Link>
         </motion.div>
 
-        {/* Carousel Section */}
+        {/* --- CAROUSEL FIX --- */}
         <motion.div 
           variants={fadeInUp}
           initial="initial"
           animate="animate"
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="w-full relative px-4 md:px-0"
+          className="w-full relative px-0 md:px-12" // Okların sığması için md:px-12 eklendi
         >
-          <Carousel opts={{ align: "start", loop: true }} className="w-full">
+          <Carousel 
+            opts={{ align: "start", loop: true }} 
+            className="w-full"
+          >
             <CarouselContent className="-ml-6">
               {projectsData.archive.map((project, index) => (
                 <CarouselItem key={index} className="pl-6 md:basis-1/2 lg:basis-1/3">
                   <div className="h-[520px] flex flex-col bg-slate-900/40 border border-white/10 rounded-[2rem] overflow-hidden backdrop-blur-md transition-all duration-500 hover:border-blue-500/40 group relative">
-                    
                     <div className="h-48 bg-slate-800/50 relative flex items-center justify-center border-b border-white/5 overflow-hidden">
                       {project.imageUrl ? (
-                        <Image 
-                          src={project.imageUrl} 
-                          fill 
-                          className="object-cover opacity-60 group-hover:opacity-90 transition-all duration-700 group-hover:scale-110" 
-                          alt={project.title} 
-                        />
+                        <Image src={project.imageUrl} fill className="object-cover opacity-60 group-hover:opacity-90 transition-all duration-700 group-hover:scale-110" alt={project.title} />
                       ) : (
                         <ImageIcon size={40} className="text-white/5" />
                       )}
-                      
-                      <a 
-                        href={project.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="absolute top-4 right-4 z-[30] p-3 rounded-xl bg-slate-950/90 text-blue-400 hover:text-white border border-white/10 hover:border-blue-500/50 hover:bg-blue-600 transition-all shadow-xl backdrop-blur-md"
-                        onClick={(e) => e.stopPropagation()}
-                      >
+                      <a href={project.url} target="_blank" rel="noopener noreferrer" className="absolute top-4 right-4 z-[30] p-3 rounded-xl bg-slate-950/90 text-blue-400 hover:text-white border border-white/10 hover:border-blue-500/50 hover:bg-blue-600 transition-all shadow-xl backdrop-blur-md" onClick={(e) => e.stopPropagation()}>
                         <LinkIcon size={18} />
                       </a>
                     </div>
@@ -196,7 +176,6 @@ export function ProjectsSection() {
                       <p className="text-sm font-mono text-gray-400 leading-relaxed mb-6 line-clamp-3">
                         {project.desc}
                       </p>
-                      
                       <div className="flex flex-wrap gap-2 mt-auto">
                         {project.techs.map((tech, i) => (
                           <span key={i} className="px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-[11px] font-mono text-gray-400 group-hover:text-blue-300/70 group-hover:border-blue-500/20 transition-colors uppercase tracking-tighter">
@@ -210,9 +189,10 @@ export function ProjectsSection() {
               ))}
             </CarouselContent>
             
-            <div className="hidden md:block">
-              <CarouselPrevious className="-left-16 border-white/10 bg-slate-900/50 hover:bg-blue-500/20 text-white transition-all" />
-              <CarouselNext className="-right-16 border-white/10 bg-slate-900/50 hover:bg-blue-500/20 text-white transition-all" />
+            {/* Oklar için kapsayıcı div ve daha güvenli konumlandırma */}
+            <div className="flex items-center justify-center gap-4 mt-8 md:mt-0">
+               <CarouselPrevious className="static md:absolute md:-left-12 translate-y-0 border-white/10 bg-slate-900/50 hover:bg-blue-500/20 text-white" />
+               <CarouselNext className="static md:absolute md:-right-12 translate-y-0 border-white/10 bg-slate-900/50 hover:bg-blue-500/20 text-white" />
             </div>
           </Carousel>
         </motion.div>
