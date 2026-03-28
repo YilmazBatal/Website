@@ -48,6 +48,13 @@ const projectsData = {
       url: "https://ilmas.itch.io/sheero-the-hero",
       imageUrl: "/Games/sheero.png"
     },
+    {
+      title: "Bio-Bot [2023]",
+      desc: "Speedrunning platform game. Built for Speedrun SCOREJAM.",
+      techs: ["Level Design", "Leaderboard", "Speedruning"],
+      url: "https://ilmas.itch.io/bio-bot",
+      imageUrl: "/Games/bio.png"
+    },
   ]
 };
 
