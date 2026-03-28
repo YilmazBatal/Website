@@ -13,7 +13,7 @@ export function Header() {
   }
 
   return (
-    <header className="sticky top-0 w-full backdrop-blur-md bg-background/30 z-50">
+    <header className="sticky top-0 w-full backdrop-blur-md bg-background/30 bg-blue-900/20 z-50">
       <div className="h-16 container mx-auto max-w-7xl flex flex-row items-center justify-between md:px-12 px-4 mx-auto">
         <div className="font-mono font-bold text-2xl">
           <Button

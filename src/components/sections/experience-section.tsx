@@ -27,7 +27,18 @@ export function ExperienceSection() {
             >
               Education & Experience
             </motion.h1>
-            
+            <motion.p
+          initial={{ opacity: 0, y: 50 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
+          transition={{ 
+            duration: 0.6,
+            delay: 0.2,
+            ease: "easeOut"
+          }}
+          className="text-[1.33rem] font-mono mb-5 max-w-2xl text-gray-400 "
+        >
+          The MOST used languages, libraries, frameworks, tools used by me.
+        </motion.p>
           </div>
           <div className="flex md:flex-row flex-col md:items-start items-center justify-around mx-auto gap-8 w-full">
             {/* Education */}

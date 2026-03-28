@@ -45,7 +45,7 @@ export function AboutSection() {
                 delay: 0.4,
                 ease: "easeOut",
               }}
-              className="text-[1.33rem] font-mono mb-2 max-w-2xl"
+              className="text-[1.33rem] font-mono mb-2 max-w-2xl text-gray-400"
             >
               I'm a Computer Engineering student with a passion for indie game
               development. I am self-taught in Unity and C#, and I build my own

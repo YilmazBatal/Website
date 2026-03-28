@@ -112,7 +112,7 @@ export function SkillSection() {
             delay: 0.2,
             ease: "easeOut"
           }}
-          className="text-xl font-semibold mb-10 mx-auto max-w-2xl font-mono"
+          className="text-[1.33rem] font-mono mb-5 max-w-2xl text-gray-400 "
         >
           The MOST used languages, libraries, frameworks, tools used by me.
         </motion.p>
