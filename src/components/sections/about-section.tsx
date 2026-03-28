@@ -1,6 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
+import { Link, Newspaper } from "lucide-react";
 import { useRef } from "react";
 
 export function AboutSection() {
@@ -47,10 +48,32 @@ export function AboutSection() {
               }}
               className="text-[1.33rem] font-mono mb-2 max-w-2xl text-gray-400"
             >
+                <a 
+                  className="text-[1.5rem] font-mono mb-2 max-w-2xl text-gray-300 hover:text-blue-400 transition-colors cursor-pointer flex items-center gap-3 justify-center" 
+                  href="https://drive.google.com/file/d/1DHj8fnld8mVtK6nYDLN_tbeW7fzVAshV/view?usp=sharing"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Newspaper></Newspaper>
+                  RESUME
+                </a>
+              
+            </motion.h2>
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+              transition={{
+                duration: 0.6,
+                delay: 0.4,
+                ease: "easeOut",
+              }}
+              className="text-[1.33rem] font-mono mb-2 max-w-2xl text-gray-400"
+            >
               I'm a Computer Engineering student with a passion for indie game
               development. I am self-taught in Unity and C#, and I build my own
               projects from concept to completion.
             </motion.h2>
+            
           </div>
         </motion.div>
       </div>
