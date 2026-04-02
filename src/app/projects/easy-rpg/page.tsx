@@ -32,6 +32,12 @@ export default function EasyRPGPage() {
 
   const showcaseImages = [
     {
+      title: "Turn-Based Combat",
+      tag: "Gameplay",
+      desc: "Real-time turn-based combat system with event-driven mechanics and dynamic UI feedback.",
+      src: "/Signature/battlegif.gif",
+    },
+    {
       title: "Map & Navigation UI",
       tag: "Interface Design",
       desc: "Custom minimap logic with dynamic quest markers and coordinate tracking.",
