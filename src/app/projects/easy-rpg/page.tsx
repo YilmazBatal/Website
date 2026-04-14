@@ -17,14 +17,13 @@ import Image from "next/image";
 import { useRef, useState, useEffect } from "react";
 
 export default function EasyRPGPage() {
-  const [selectedImg, setSelectedImg] = useState<string | null>(null);
+  const [selectedMedia, setSelectedMedia] = useState<{src: string, isVideo: boolean} | null>(null);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: false, amount: 0.1 });
 
-  // Close modal with Esc key
   useEffect(() => {
     const handleEsc = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setSelectedImg(null);
+      if (e.key === "Escape") setSelectedMedia(null);
     };
     window.addEventListener("keydown", handleEsc);
     return () => window.removeEventListener("keydown", handleEsc);
@@ -35,19 +34,22 @@ export default function EasyRPGPage() {
       title: "Turn-Based Combat",
       tag: "Gameplay",
       desc: "Real-time turn-based combat system with event-driven mechanics and dynamic UI feedback.",
-      src: "/Signature/battlegif.gif",
+      src: "/Signature/Combat.mp4",
+      isVideo: true,
     },
     {
       title: "Map & Navigation UI",
       tag: "Interface Design",
       desc: "Custom minimap logic with dynamic quest markers and coordinate tracking.",
       src: "/Signature/testgif.gif",
+      isVideo: false,
     },
     {
       title: "Inventory & Persistence",
       tag: "Data Management",
       desc: "Grid-based inventory system synced with custom JSON serialization.",
       src: "/Backpack.png",
+      isVideo: false,
     },
   ];
 
@@ -59,27 +61,31 @@ export default function EasyRPGPage() {
   ];
 
   return (
-    <main className="top-0 min-h-screen text-white relative overflow-hidden selection:bg-purple-500/30 ">
+    <main className="top-0 min-h-screen text-white relative overflow-hidden selection:bg-purple-500/30 bg-slate-950">
       
-      {/* --- LIGHTBOX MODAL --- */}
+      {/* --- LIGHTBOX MODAL (Resim veya Video Desteği) --- */}
       <AnimatePresence>
-        {selectedImg && (
+        {selectedMedia && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelectedImg(null)}
+            onClick={() => setSelectedMedia(null)}
             className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-xl p-4 md:p-12 cursor-zoom-out"
           >
             <motion.div
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-7xl aspect-video rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] border border-white/10"
+              className="relative w-full max-w-7xl aspect-video rounded-3xl overflow-hidden shadow-[0_0_50px_rgba(59,130,246,0.2)] border border-white/10 bg-black"
               onClick={(e) => e.stopPropagation()}
             >
-              <Image src={selectedImg} alt="Preview" fill className="object-contain" priority />
-              <button onClick={() => setSelectedImg(null)} className="absolute top-6 right-6 p-3 rounded-full bg-slate-900/80 hover:bg-red-500 transition-colors border border-white/10 text-white">
+              {selectedMedia.isVideo ? (
+                <video src={selectedMedia.src} controls autoPlay loop className="w-full h-full object-contain" />
+              ) : (
+                <Image src={selectedMedia.src} alt="Preview" fill className="object-contain" priority />
+              )}
+              <button onClick={() => setSelectedMedia(null)} className="absolute top-6 right-6 p-3 rounded-full bg-slate-900/80 hover:bg-red-500 transition-colors border border-white/10 text-white z-50">
                 <X size={24} />
               </button>
             </motion.div>
@@ -87,14 +93,14 @@ export default function EasyRPGPage() {
         )}
       </AnimatePresence>
 
-      {/* Background Effects */}
+      {/* Arka Plan Efektleri */}
       <div className="absolute top-0 left-0 w-full h-[2048px] bg-gradient-to-b from-blue-900/40 via-purple-900/25 to-transparent -z-20 pointer-events-none" />
-      <div className="absolute  top-[20%] right-[-10%] w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
+      <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-6xl mx-auto py-24 px-6 md:px-8 relative z-10">
-            <h1 className="text-1xl font-semibold mb-6 italic uppercase tracking-tighter leading-none text-yellow-500/50 text-center">This page is under construction!</h1>
+        <h1 className="text-1xl font-semibold mb-6 italic uppercase tracking-tighter leading-none text-yellow-500/50 text-center">This page is under construction!</h1>
         
-        {/* Navigation */}
+        {/* Navigasyon */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
           <Link href="/#Projects" className="inline-flex items-center gap-2 text-blue-400/80 mb-12 hover:text-blue-300 hover:gap-4 transition-all font-mono text-xs tracking-widest uppercase">
             <ArrowLeft size={16} /> Return_to_Home
@@ -103,21 +109,11 @@ export default function EasyRPGPage() {
 
         {/* Header */}
         <header className="mb-16">
-          <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 50 }}
-            animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-left"
-          >
-
+          <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }} transition={{ duration: 0.8, ease: "easeOut" }} className="text-left">
             <h1 className="text-7xl font-semibold mb-6 italic uppercase tracking-tighter leading-none">Easy RPG</h1>
             <h2 className="text-[1.33rem] font-mono mb-2 max-w-5xl text-gray-400 leading-relaxed">
-  A modular, extensible RPG framework built with Unity. Focused on 
-  <span className="text-blue-400"> Decoupled Architecture</span> and 
-  <span className="text-blue-400"> Performance-Driven UI</span>. 
-  Moving beyond hardcoded logic into a data-driven ecosystem.
-</h2>
+              A modular, extensible RPG framework built with Unity. Focused on <span className="text-blue-400"> Decoupled Architecture</span> and <span className="text-blue-400"> Performance-Driven UI</span>. Moving beyond hardcoded logic into a data-driven ecosystem.
+            </h2>
           </motion.div>
         </header>
 
@@ -132,22 +128,38 @@ export default function EasyRPGPage() {
           ))}
         </div>
 
-        {/* --- CARD-BASED CAROUSEL --- */}
+        {/* --- CARD-BASED CAROUSEL (Video Desteği Eklendi) --- */}
         <section className="mb-32">
           <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-6">
               {showcaseImages.map((item, index) => (
                 <CarouselItem key={index} className="pl-6 lg:basis-1/1">
                   <div className="group flex flex-col bg-slate-900/20 border border-white/5 rounded-[2.5rem] overflow-hidden transition-all duration-500 hover:border-blue-500/30 hover:bg-slate-900/40 shadow-2xl">
-                    <div className="relative w-full aspect-video md:h-[500px] overflow-hidden border-b border-white/5 cursor-zoom-in" onClick={() => setSelectedImg(item.src)}>
-                      <Image src={item.src} alt={item.title} fill className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                    <div className="relative w-full aspect-video md:h-[500px] overflow-hidden border-b border-white/5 cursor-zoom-in" onClick={() => setSelectedMedia({src: item.src, isVideo: item.isVideo})}>
+                      
+                      {item.isVideo ? (
+                        <video 
+                          src={item.src} 
+                          muted 
+                          autoPlay 
+                          loop 
+                          playsInline 
+                          className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" 
+                        />
+                      ) : (
+                        <Image src={item.src} alt={item.title} fill className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+                      )}
+
                       <div className="absolute top-6 left-6 z-20">
-                        <span className="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-blue-400 uppercase tracking-widest">System_Preview</span>
+                        <span className="px-3 py-1 rounded-full bg-slate-950/80 backdrop-blur-md border border-white/10 text-[10px] font-mono text-blue-400 uppercase tracking-widest">
+                          {item.isVideo ? "System_Video" : "System_Preview"}
+                        </span>
                       </div>
                       <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 pointer-events-none">
                          <div className="p-4 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-500/50"><Maximize2 size={32} className="text-blue-400" /></div>
                       </div>
                     </div>
+                    {/* Alt Bilgi Alanı */}
                     <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-br from-transparent to-blue-500/[0.02]">
                       <div className="max-w-2xl">
                         <div className="flex items-center gap-2 mb-4">
@@ -158,7 +170,7 @@ export default function EasyRPGPage() {
                         <p className="text-gray-400 font-mono text-sm md:text-base leading-relaxed">{item.desc}</p>
                       </div>
                       <div className="hidden md:flex flex-col items-end gap-2 opacity-30 group-hover:opacity-100 transition-opacity">
-                        <button onClick={() => setSelectedImg(item.src)} className="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-blue-600 transition-all"><Maximize2 size={24} /></button>
+                        <button onClick={() => setSelectedMedia({src: item.src, isVideo: item.isVideo})} className="p-4 rounded-2xl border border-white/10 bg-white/5 hover:bg-blue-600 transition-all"><Maximize2 size={24} /></button>
                         <span className="text-[9px] font-mono text-gray-500 uppercase tracking-tighter">Ref_ID: {index + 1}04-X</span>
                       </div>
                     </div>
@@ -173,47 +185,21 @@ export default function EasyRPGPage() {
           </Carousel>
         </section>
 
-        {/* --- ARCHITECTURE DEEP-DIVE (DROPDOWN CARDS) --- */}
+        {/* Architecture Section */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-32">
           <div className="lg:col-span-4 sticky top-24">
             <h2 className="text-3xl font-bold italic uppercase tracking-tighter mb-6 flex items-center gap-3 leading-tight"><Code2 className="text-blue-500" /> System<br />Architecture</h2>
             <p className="text-gray-400 font-mono text-sm leading-relaxed">Moving away from rigid monolithic structures. Implementing systems that favor expansion over modification.</p>
           </div>
           <div className="lg:col-span-8 space-y-6">
-            <DropdownCard 
-      icon={<Layers size={20} />} 
-      title="Service-Oriented Architecture (SOA)" 
-      desc="Centralized system access via Service Locator pattern to eliminate hard dependencies." 
-      details="UI, Combat, and Data Managers operate as isolated services. This decoupling ensures that a change in the Inventory logic never breaks the Combat engine, making the codebase modular and unit-test ready." 
-    />
-
-    {/* 2. Hybrid Data Kartı (Mevcut) */}
-    <DropdownCard 
-      icon={<Database size={20} />} 
-      title="Hybrid Data Persistence" 
-      desc="Strategic mix of ScriptableObjects for static templates and JSON for dynamic player state." 
-      details="Utilized custom JSON serialization for persistent data like inventory indices and player stats. This approach allows for 'Hot Reloading' during development and optimizes save-file overhead by avoiding redundant metadata." 
-    />
-
-    {/* 3. YENİ: UI Framework (LeanTween / Event-Based) */}
-    <DropdownCard 
-      icon={<Zap size={20} />} 
-      title="Asynchronous UI Framework" 
-      desc="Tween-based feedback loops driven by a C# Event Bus for high-performance interactions." 
-      details="Replaced expensive Update() polling with an Observer pattern. Using LeanTween for procedural animations, UI elements like health bars and notifications react only when specific data-change events fire, reducing CPU overhead in complex combat scenes." 
-    />
-
-    {/* 4. YENİ: Scripting (C# / Unity LTS) */}
-    <DropdownCard 
-      icon={<Terminal size={20} />} 
-      title="Production-Grade Scripting" 
-      desc="Strongly typed C# architecture leveraging modern OOP principles within Unity 2022.3 LTS." 
-      details="Implemented advanced C# features including Generics for Manager templates, Coroutines for non-blocking combat sequences, and Deep-Copy constructors for entity instantiation. Adhering to SOLID principles to ensure the framework remains scalable for multi-year development." 
-    />
+            <DropdownCard icon={<Layers size={20} />} title="Service-Oriented Architecture (SOA)" desc="Centralized system access via Service Locator pattern to eliminate hard dependencies." details="UI, Combat, and Data Managers operate as isolated services. This decoupling ensures that a change in the Inventory logic never breaks the Combat engine, making the codebase modular and unit-test ready." />
+            <DropdownCard icon={<Database size={20} />} title="Hybrid Data Persistence" desc="Strategic mix of ScriptableObjects for static templates and JSON for dynamic player state." details="Utilized custom JSON serialization for persistent data like inventory indices and player stats. This approach allows for 'Hot Reloading' during development and optimizes save-file overhead by avoiding redundant metadata." />
+            <DropdownCard icon={<Zap size={20} />} title="Asynchronous UI Framework" desc="Tween-based feedback loops driven by a C# Event Bus for high-performance interactions." details="Replaced expensive Update() polling with an Observer pattern. UI elements like health bars react only when specific events fire, reducing CPU overhead in complex combat scenes." />
+            <DropdownCard icon={<Terminal size={20} />} title="Production-Grade Scripting" desc="Strongly typed C# architecture leveraging modern OOP principles within Unity 2022.3 LTS." details="Implemented advanced C# features including Generics for Manager templates and Coroutines for non-blocking sequences. Adhering to SOLID principles for multi-year scalability." />
           </div>
         </section>
 
-        {/* --- ROADMAP SECTION --- */}
+        {/* Roadmap Section */}
         <section className="p-8 md:p-12 rounded-[2.5rem] border border-blue-500/20 bg-blue-500/5 backdrop-blur-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 p-8 opacity-5"><Milestone size={180} /></div>
           <h2 className="text-2xl font-bold uppercase tracking-widest mb-12 flex items-center gap-3 italic"><Milestone className="text-blue-500" /> Development Roadmap</h2>
