@@ -9,8 +9,9 @@ import {
 } from "@/components/ui/carousel";
 import { motion, AnimatePresence, useInView } from "framer-motion";
 import { 
-  ArrowLeft, Cpu, Database, Layout, ChevronDown, 
-  Terminal, Code2, Zap, Milestone, Layers, Maximize2, X
+  ArrowLeft, Cpu, Database, ChevronDown, 
+  Terminal, Code2, Zap, Milestone, Layers, Maximize2, X,
+  User, Music, Layout, Gamepad2, SearchCheck, Sparkles, DownloadCloud
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -60,10 +61,26 @@ export default function EasyRPGPage() {
     { label: "Scripting", value: "C# / Unity LTS", icon: <Terminal size={16} /> },
   ];
 
+  const creditItems = [
+    { label: "Lead Developer", value: "Yilmaz Batal", icon: <Code2 size={16} /> },
+    { label: "UI/UX Architecture", value: "Yilmaz Batal", icon: <Layout size={16} /> },
+    { label: "Game Design", value: "Yilmaz Batal", icon: <Gamepad2 size={16} /> },
+    { label: "Testing", value: "Yilmaz Batal", icon: <SearchCheck size={16} /> },
+    { label: "Assets & Characters", value: "Gemini 3 - Fast", icon: <Sparkles size={16} /> },
+    { 
+      label: "Audio Lead", 
+      value: (
+        <a href="https://brandonmicdavis.com/" target="_blank" rel="noreferrer" className="text-blue-400 hover:text-blue-300 transition">
+          Brandon Davis
+        </a>
+      ), 
+      icon: <Music size={16} /> 
+    },
+  ];
+
   return (
     <main className="top-0 min-h-screen text-white relative overflow-hidden selection:bg-purple-500/30 bg-slate-950">
       
-      {/* --- LIGHTBOX MODAL (Resim veya Video Desteği) --- */}
       <AnimatePresence>
         {selectedMedia && (
           <motion.div
@@ -81,7 +98,7 @@ export default function EasyRPGPage() {
               onClick={(e) => e.stopPropagation()}
             >
               {selectedMedia.isVideo ? (
-                <video src={selectedMedia.src} controls autoPlay loop className="w-full h-full object-contain" />
+                <video src={selectedMedia.src} suppressHydrationWarning={true} controls autoPlay loop className="w-full h-full object-contain" />
               ) : (
                 <Image src={selectedMedia.src} alt="Preview" fill className="object-contain" priority />
               )}
@@ -93,21 +110,34 @@ export default function EasyRPGPage() {
         )}
       </AnimatePresence>
 
-      {/* Arka Plan Efektleri */}
       <div className="absolute top-0 left-0 w-full h-[2048px] bg-gradient-to-b from-blue-900/40 via-purple-900/25 to-transparent -z-20 pointer-events-none" />
       <div className="absolute top-[20%] right-[-10%] w-[400px] h-[400px] bg-blue-600/5 blur-[120px] rounded-full -z-10" />
 
       <div className="max-w-6xl mx-auto py-24 px-6 md:px-8 relative z-10">
         <h1 className="text-1xl font-semibold mb-6 italic uppercase tracking-tighter leading-none text-yellow-500/50 text-center">This page is under construction!</h1>
         
-        {/* Navigasyon */}
         <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }}>
           <Link href="/#Projects" className="inline-flex items-center gap-2 text-blue-400/80 mb-12 hover:text-blue-300 hover:gap-4 transition-all font-mono text-xs tracking-widest uppercase">
             <ArrowLeft size={16} /> Return_to_Home
           </Link>
         </motion.div>
 
-        {/* Header */}
+        <div className="fixed right-6 bottom-6 z-40 w-[320px] max-w-[calc(100vw-3rem)]">
+          <div className="p-5 rounded-3xl border border-white/25 bg-slate-950/95 backdrop-blur-3xl shadow-2xl shadow-blue-500/10">
+            <p className="text-[10px] uppercase tracking-[0.4em] text-blue-400 font-mono mb-2">Latest</p>
+            <h2 className="text-2xl font-semibold tracking-tight mb-4">Build 0.0.1</h2>
+            <a
+              href="https://drive.google.com/drive/folders/1zN78K6mbtYIUMgJV7N0UGI5R91pUlJWf?usp=sharing"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center justify-center gap-2 rounded-full bg-blue-500 px-4 py-3 text-sm font-semibold uppercase tracking-[0.2em] text-white transition hover:bg-blue-400"
+            >
+              <DownloadCloud size={18} />
+              Download
+            </a>
+          </div>
+        </div>
+
         <header className="mb-16">
           <motion.div ref={ref} initial={{ opacity: 0, y: 50 }} animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }} transition={{ duration: 0.8, ease: "easeOut" }} className="text-left">
             <h1 className="text-7xl font-semibold mb-6 italic uppercase tracking-tighter leading-none">Easy RPG</h1>
@@ -117,7 +147,6 @@ export default function EasyRPGPage() {
           </motion.div>
         </header>
 
-        {/* Technical Stats Panel */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20">
           {technicalStats.map((stat, i) => (
             <motion.div key={i} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.1 }} className="p-5 rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-md">
@@ -128,7 +157,6 @@ export default function EasyRPGPage() {
           ))}
         </div>
 
-        {/* --- CARD-BASED CAROUSEL (Video Desteği Eklendi) --- */}
         <section className="mb-32">
           <Carousel opts={{ align: "start", loop: true }} className="w-full">
             <CarouselContent className="-ml-6">
@@ -144,6 +172,7 @@ export default function EasyRPGPage() {
                           autoPlay 
                           loop 
                           playsInline 
+                          suppressHydrationWarning={true}
                           className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-all duration-700" 
                         />
                       ) : (
@@ -159,7 +188,6 @@ export default function EasyRPGPage() {
                          <div className="p-4 rounded-full bg-blue-500/20 backdrop-blur-md border border-blue-500/50"><Maximize2 size={32} className="text-blue-400" /></div>
                       </div>
                     </div>
-                    {/* Alt Bilgi Alanı */}
                     <div className="p-8 md:p-12 flex flex-col md:flex-row justify-between items-start md:items-end gap-6 bg-gradient-to-br from-transparent to-blue-500/[0.02]">
                       <div className="max-w-2xl">
                         <div className="flex items-center gap-2 mb-4">
@@ -185,7 +213,33 @@ export default function EasyRPGPage() {
           </Carousel>
         </section>
 
-        {/* Architecture Section */}
+        <section className="mb-32">
+          <div className="flex items-center gap-4 mb-10">
+             <User className="text-blue-500" />
+             <h2 className="text-3xl font-bold italic uppercase tracking-tighter leading-none">Project Credits</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {creditItems.map((item, idx) => (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className="p-6 rounded-3xl border border-white/5 bg-white/[0.02] backdrop-blur-md transition-all hover:border-blue-500/30 hover:bg-white/[0.04]"
+              >
+                <div className="flex items-center gap-4 mb-3">
+                   <div className="p-2 rounded-xl bg-blue-500/10 text-blue-500">
+                     {item.icon}
+                   </div>
+                   <p className="text-[10px] uppercase tracking-[0.3em] text-gray-500 font-mono">{item.label}</p>
+                </div>
+                <p className="text-xl font-bold tracking-tight text-white">{item.value}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start mb-32">
           <div className="lg:col-span-4 sticky top-24">
             <h2 className="text-3xl font-bold italic uppercase tracking-tighter mb-6 flex items-center gap-3 leading-tight"><Code2 className="text-blue-500" /> System<br />Architecture</h2>
@@ -199,7 +253,6 @@ export default function EasyRPGPage() {
           </div>
         </section>
 
-        {/* Roadmap Section */}
         <section className="p-8 md:p-12 rounded-[2.5rem] border border-blue-500/20 bg-blue-500/5 backdrop-blur-xl relative overflow-hidden">
           <div className="absolute top-0 right-0 p-8 opacity-5"><Milestone size={180} /></div>
           <h2 className="text-2xl font-bold uppercase tracking-widest mb-12 flex items-center gap-3 italic"><Milestone className="text-blue-500" /> Development Roadmap</h2>
@@ -209,12 +262,11 @@ export default function EasyRPGPage() {
             <RoadmapItem step="03" status="Planned" title="Polish & UI" desc="Shader-graph integration and a comprehensive visual overhaul of the UGUI." />
           </div>
         </section>
+        
       </div>
     </main>
   );
 }
-
-// --- SUB-COMPONENTS ---
 
 function DropdownCard({ icon, title, desc, details }: { icon: React.ReactNode, title: string, desc: string, details: string }) {
   const [isOpen, setIsOpen] = useState(false);
