@@ -15,7 +15,7 @@ import { useRef } from "react";
 
 const projectsData = {
   signature: {
-    title: "Easy RPG [2026]",
+    title: "Easy RPG [2025-2026]",
     slug: "easy-rpg",
     desc: "This will be my signature project for the next few years. A sophisticated RPG system currently in active development within Unity, transitioning from core logic to a high-fidelity graphical interface. Featuring a decoupled modular system for dynamic inventory management and JSON-driven data persistence. [ Please go to details page for further information ]",
     status: "Active Development",
@@ -28,6 +28,13 @@ const projectsData = {
   },
   archive: [
     {
+      title: "Mute.Exe [2026]",
+      desc: "Maze and story based top down puzzle game.",
+      techs: ["Combat FSM", "Dialogue System"],
+      url: "https://ilmas.itch.io/cube-slasher",
+      imageUrl: "/Games/mute.png"
+    },
+    {
       title: "Cube Slasher [2024]",
       desc: "A 2D arcade mob slasher where you face new monsters as u improve. I handled all programming and art.",
       techs: ["Binary Serializer", "Scriptable Objects", "Dyanmic Generation", "Arcade RPG"],
@@ -35,10 +42,16 @@ const projectsData = {
       imageUrl: "/Games/cubeslasher.png"
     },
     {
+      title: "Bio-Bot [2024]",
+      desc: "Speedrunning platform game. Built for Speedrun SCOREJAM.",
+      techs: ["Level Design", "Leaderboard", "Speedruning"],
+      url: "https://ilmas.itch.io/bio-bot",
+      imageUrl: "/Games/bio.png"
+    },
+    {
       title: "Virtual Friend Cowie [2024]",
       desc: "Pou like virtual pet game. Programming, art, and design is done by me.",
       techs: ["Binary Serializer", "Virtual Pet System", "Minigames"],
-      url: "https://ilmas.itch.io/cube-slasher",
       imageUrl: "/Games/cowie.png"
     },
     {
@@ -48,13 +61,7 @@ const projectsData = {
       url: "https://ilmas.itch.io/sheero-the-hero",
       imageUrl: "/Games/sheero.png"
     },
-    {
-      title: "Bio-Bot [2023]",
-      desc: "Speedrunning platform game. Built for Speedrun SCOREJAM.",
-      techs: ["Level Design", "Leaderboard", "Speedruning"],
-      url: "https://ilmas.itch.io/bio-bot",
-      imageUrl: "/Games/bio.png"
-    },
+    
   ]
 };
 

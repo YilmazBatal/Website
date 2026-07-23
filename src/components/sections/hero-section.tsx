@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
-import { Github, Mail, MapPin, Phone } from "lucide-react";
+import { Github, Mail, MapPin, Newspaper, Phone } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
 import Link from "next/link";
@@ -89,14 +89,22 @@ export function HeroSection() {
                 <FaLinkedin style={{ scale: "1.75" }} />
               </Link>
             </Button>
-            <Button size={"icon-lg"} asChild>
+            {/* <Button size={"icon-lg"} asChild>
               <Link
                 target="_blank"
                 href={"https://wa.link/xlx61y"}
               >
                 <FaWhatsapp style={{ scale: "1.75" }} />
               </Link>
+            </Button> */}
+            <Button size={"lg"} asChild className="min-w-[140px]">
+              <Link
+                href={"#Projects"}
+              >
+                <Newspaper size={18} className="group-hover:text-blue-400 transition-colors" />TO PROJECTS
+              </Link>
             </Button>
+            
           </motion.div>
         </div>
         {/* Profile Pic */}

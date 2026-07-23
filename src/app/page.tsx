@@ -9,10 +9,10 @@ export default function Home() {
   return (
     <div className="max-w-7xl md:px-12 px-4 mx-auto">
       <HeroSection/>
-      <AboutSection/>
       <ProjectsSection/>
-      <SkillSection/>
+      <AboutSection/>
       <ExperienceSection/>
+      <SkillSection/>
       <ContactSection/>
     </div>
     
