@@ -64,7 +64,7 @@ export function AboutSection() {
   className="flex justify-center mt-6"
 >
   <a
-    href="https://drive.google.com/file/d/1DHj8fnld8mVtK6nYDLN_tbeW7fzVAshV/view?usp=sharing"
+    href="https://drive.google.com/drive/folders/1zN78K6mbtYIUMgJV7N0UGI5R91pUlJWf?usp=sharing"
     target="_blank"
     rel="noopener noreferrer"
     className="group flex items-center gap-3 px-8 py-3 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-gray-300 font-mono text-sm tracking-widest uppercase transition-all duration-300 hover:border-blue-500/50 hover:bg-blue-500/10 hover:text-white hover:shadow-[0_0_20px_rgba(59,130,246,0.15)]"
